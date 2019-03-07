@@ -1,0 +1,81 @@
+<!--   
+	Project Name: JS30 Clock
+	Project URL: http://dcjwest.github.io/...
+	Description: Real-time Javascript Clock
+-->
+
+<!-- =================================== -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+	<title>JS & CSS Clock</title>
+	<link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+	<div class="video-wrap container">
+		<video src="vid.mp4" type="video/mp4" autoplay loop muted></video>
+	</div>
+	<div class="container">
+		<div class="clock">
+			<div class="clock-face">
+				<div id="hour-hand" class="hand"></div>
+				<div id="min-hand" class="hand"></div>
+				<div id="sec-hand" class="hand"></div>
+				<span data-hour="12" class="hour">12</span>
+				<span data-hour="1" class="hour">1</span>
+				<span data-hour="2" class="hour">2</span>
+				<span data-hour="3" class="hour">3</span>
+				<span data-hour="4" class="hour">4</span>
+				<span data-hour="5" class="hour">5</span>
+				<span data-hour="6" class="hour">6</span>
+				<span data-hour="7" class="hour">7</span>
+				<span data-hour="8" class="hour">8</span>
+				<span data-hour="9" class="hour">9</span>
+				<span data-hour="10" class="hour">10</span>
+				<span data-hour="11" class="hour">11</span>
+			</div>
+		</div>
+	</div>
+	<script>
+		const hourHand = document.getElementById("hour-hand");
+		const minHand = document.getElementById("min-hand");
+		const secHand = document.getElementById("sec-hand");
+		const clockHands = document.querySelectorAll(".hand");
+
+		//Create and manipulate date-time object to animate clock hands
+		function setTime(){
+			const now = new Date();
+			const hours = now.getHours();
+			const minutes = now.getMinutes();
+			const seconds = now.getSeconds();
+
+			//Switch off transition to avoid hands visually resetting
+			if (seconds === 0){
+				clockHands.forEach(hand => hand.style.transition = "none");
+			}
+			//Re-apply transition
+			else {
+				clockHands.forEach(hand => {
+										hand.style.transition = "all 0.05s";
+										hand.style.transitionTimingFunction = "cubic-bezier(0.01, 3.29, 0.74, -0.57)";
+										});
+			}
+
+			//Convert time elements to degrees. 90deg added to correct for offset in stylesheet
+			const hoursDeg = ((hours/12)*360)+90;
+			const minutesDeg = ((minutes/60)*360)+90;
+			const secondsDeg = ((seconds/60)*360)+90;
+
+			//Animate clock hands by dynamically changing the transform property
+			hourHand.style.transform = `rotate(${hoursDeg}deg)`;
+			minHand.style.transform = `rotate(${minutesDeg}deg)`;
+			secHand.style.transform = `rotate(${secondsDeg}deg)`;
+		}
+
+		setInterval(setTime, 1000);
+	</script>
+</body>
+</html>

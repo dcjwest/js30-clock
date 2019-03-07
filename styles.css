@@ -1,0 +1,144 @@
+/*   
+	Project Name: JS30 Clock
+	Project URL: http://dcjwest.github.io/...
+	Description: Real-time Javascript Clock
+*/
+
+/* =================================== */
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	font-family: sans-serif;
+	font-size: 4vw;
+}
+
+@media screen and (min-width: 621px){
+	html {font-size: 3vw;}
+}
+
+@media screen and (min-width: 800px){
+	html {font-size: 2.5vw;}
+}
+
+@media screen and (min-width: 996px){
+	html {font-size: 2vw;}
+}
+
+html, body {
+	padding: 0 1rem;
+	height: 100vh;
+	overflow: hidden;
+}
+
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+	width: 100%;
+}
+
+.video-wrap {
+	background: #000;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.video-wrap video {
+	min-height: 100%;
+	min-width: 100%;
+}
+
+.clock {
+	border: 1rem solid rgba(255,255,255,0.9);;
+	border-radius: 50%;
+	box-shadow: 
+		0 0 4px .1rem rgba(0,0,0,0.2),
+		0 0 4px .2rem rgba(0,0,0,0.1);
+	width: 10rem;
+	height: 10rem;
+	position: relative;
+}
+
+@media screen and (min-width: 1125px){
+	.clock {
+		width: 14rem;
+		height: 14rem;
+	}
+}
+
+.clock-face {
+	background-color: rgba(0,0,0,0.3);
+	border-radius: 50%;
+	box-shadow: 
+		inset .2rem .2rem 4px .2rem rgba(0,0,0,0.2),
+		inset .4rem .4rem 4px .2rem rgba(0,0,0,0.1);
+	position: relative;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 100%;
+	height: 100%;
+}
+
+.clock-face::after {
+	background-color: #000; 
+	border-radius: 50%;
+	box-shadow: inset .05rem .1rem 3px rgba(255,255,255,0.7);
+	content: '';
+	width: .7rem;
+	height: .7rem;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.hand {
+	background-color: #fff;
+	position: absolute;
+	top: 50%;
+	right: 50%;
+	width: 47%;
+	height: .2rem;
+	transform-origin: 100%;
+	transform: translateY(-0.1rem) rotate(90deg);
+	transition: all 0.05s;
+	transition-timing-function: cubic-bezier(0.01, 3.29, 0.74, -0.57);
+
+}
+
+#hour-hand {
+	width: 37%;
+	height: .24rem;
+}
+
+#sec-hand {
+	background-color: #f00;
+	height: .14rem;
+}
+
+.hour {
+	color: #fff;
+	position: absolute;
+	text-align: center;
+	width: 1.1rem;
+}
+
+.hour[data-hour="1"] {top: 6%; right: 24%}
+.hour[data-hour="2"] {top: 24%; right: 6%}
+.hour[data-hour="3"] {top:50%; right:0; transform:translateY(-50%);}
+.hour[data-hour="4"] {bottom: 24%; right: 6%}
+.hour[data-hour="5"] {bottom: 6%; right: 24%}
+.hour[data-hour="6"] {bottom:0; left:50%; transform:translateX(-50%);}
+.hour[data-hour="7"] {bottom: 6%; left: 24%}
+.hour[data-hour="8"] {bottom: 24%; left: 6%}
+.hour[data-hour="9"] {top:50%; left:0; transform:translateY(-50%);}
+.hour[data-hour="10"] {top: 24%; left: 6%}
+.hour[data-hour="11"] {top: 6%; left: 24%}
+.hour[data-hour="12"] {top:0; left:50%; transform:translateX(-50%);}
